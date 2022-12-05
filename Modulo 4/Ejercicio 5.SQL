@@ -5,10 +5,10 @@ date_trunc('MONTH', date(dt)) as Date,
 account_id,
 oldest_unpaid_bill_dt,
 Case when date_diff('DAY',cast (concat(substr(oldest_unpaid_bill_dt, 1,4),'-',substr(oldest_unpaid_bill_dt, 5,2),'-', substr(oldest_unpaid_bill_dt, 7,2)) as date), cast(dt as date)) >= 90 then 'Inactivo'
-when date_diff('DAY',cast (concat(substr(oldest_unpaid_bill_dt, 1,4),'-',substr(oldest_unpaid_bill_dt, 5,2),'-', substr(oldest_unpaid_bill_dt, 7,2)) as date), cast(dt as date)) <=90 or oldest_unpaid_bill_dt is null and dt='2022-10-01' then 'Activo'
+when date_diff('DAY',cast (concat(substr(oldest_unpaid_bill_dt, 1,4),'-',substr(oldest_unpaid_bill_dt, 5,2),'-', substr(oldest_unpaid_bill_dt, 7,2)) as date), cast(dt as date)) <90 or oldest_unpaid_bill_dt is null then 'Activo'
 End as client_status
 FROM "db-analytics-prod"."tbl_postpaid_cwc"
-where account_type='Residential' and org_id='338')
+where account_type='Residential' and org_id='338'and dt='2022-10-01')
 
 Select
 Date,
