@@ -10,7 +10,7 @@ b.order_type as Order_type
 FROM "db-analytics-prod"."tbl_postpaid_cwc" a
 Join "db-stage-dev"."so_hdr_cwc" b
 on a.account_id = cast(b.account_id as varchar) and date_trunc('MONTH', date(a.dt)) = date_trunc('MONTH', date(b.order_start_date))
-where a.account_type='Residential' and a.org_id='338' and b.order_type ='DEACTIVATION' and date_trunc('MONTH',date(a.dt))=date_trunc('MONTH',date('2022-10-01')))
+where a.account_type='Residential' and a.org_id='338' and b.order_type ='DEACTIVATION' and date(a.dt)=date('2022-10-01'))
 
 Select 
 Date,
