@@ -29,6 +29,9 @@ Where c.order_type ='DEACTIVATION'
 )
 
 Select
-count(distinct client) as Total_clients
+Date_trunc('Month',int_date) as Fecha,
+count(distinct client) as Total_clientes
 From Int_orders
 Where date_diff('DAY',int_date,order_date) <=40
+Group by 1
+Order by 1 asc
