@@ -4,7 +4,7 @@ Client_status as
 date(dt) as date,
 act_acct_cd as client
 FROM "db-analytics-prod"."fixed_cwp"
-Where act_cust_typ ='R' and fi_outst_age < 90 or fi_outst_age is null)
+Where act_cust_typ ='R' and fi_outst_age < 90 or fi_outst_age is null and date(dt)>= date('2022-07-01') and date(dt)<=date('2022-08-31'))
 
 ,First_v as
 (Select
@@ -16,6 +16,5 @@ Select
 Churn_date,
 count(distinct client) as churners
 From First_v
-Where Churn_date>= date('2022-07-01') and Churn_date<=date('2022-08-31')
 Group by 1
 Order by 1 ASC
